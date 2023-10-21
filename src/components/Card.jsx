@@ -1,9 +1,9 @@
-export default function Card({key, card}){
-    const img_url = key + ".png";
+
+export default function Card({data, handleClick}){
     return (
-      <div className="w-56 bg-pink-100">
-          <img src={img_url} alt="" />
-          <h3 className="bg-white bg-opacity-25">{card}</h3>
+      <div style={{backgroundImage:`url(${data.img_url})`}} className="bg-cover bg-center w-52 flex flex-col justify-end"
+      onClick={(e) => handleClick(e)} >
+          <h3 className="text-white bg-red-800 bg-opacity-50 p-1">{data.name}</h3>
         </div>
     );
   }
