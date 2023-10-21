@@ -8,6 +8,7 @@ export default {
     "./src/components/Header.jsx",
     "./src/components/Cards.jsx",
     "./src/components/Card.jsx",
+    "./src/components/GameOverScreen.jsx",
     "./src/styles/index.css",
   ],
   theme: {
