@@ -17,9 +17,6 @@ import naus_img from "./img/nausicaa.png"
 import pmono_img from "./img/pmononoke.png"
 
 export default function App() {
-  const [highScore, setHighScore] = useState(0);
-  const [curScore, setCurScore] = useState(0);
-
   const cards = [
     {id: "kk", name: "Kiki", img_url: kiki_img},
     {id: "jj", name: "Jiji", img_url: jiji_img},
@@ -41,24 +38,31 @@ export default function App() {
   // cards that've already been clicked
   const [clCards, setClCards] = useState([]);
 
-  // bool for if the game is over
-  const [gameOver, setGameOver] = useState(false);
+  const [highScore, setHighScore] = useState(0);
+  let curScore = clCards.length;
+
+  // current game status
+  const [gameStatus, setGameStatus] = useState("running");
 
   function handleClick(e) {
     // click is a dupe, game ends
     if (clCards.find((clCard) => clCard === e.target.id)){
-      endGame();
+      setGameStatus("over");
 
     // click isn't dupe, game continues
     } else {
-      setCurScore(curScore + 1);
-      if (curScore + 1 > highScore){
-        setHighScore(curScore + 1);
+      curScore++;
+      if (curScore > highScore){
+        setHighScore(curScore);
       }
 
-      setClCards([...clCards, e.target.id]);
-
-      shuffleCards();
+      // if all cards have been click, show victory screen
+      if (curScore === cards.length){
+        setGameStatus("victory");
+      } else {
+        setClCards([...clCards, e.target.id]);
+        shuffleCards();
+      }
     }
   }
 
@@ -71,8 +75,10 @@ export default function App() {
     setShCards(temp);
   }
 
-  function endGame(){
-    setGameOver(true);
+  function resetGame(){
+    setClCards([]);
+    setGameStatus("running");
+    shuffleCards();
   }
 
   return (
@@ -86,9 +92,10 @@ export default function App() {
         handleClick = {handleClick}
       />
       <GameOverScreen
-        gameOver = {gameOver}
+        gameStatus = {gameStatus}
         highScore = {highScore}
         curScore = {curScore}
+        resetGame = {resetGame}
       />
       
           
