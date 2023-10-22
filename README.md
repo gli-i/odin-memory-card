@@ -1,4 +1,5 @@
-[gli-odin-memory-card.netlify.app](gli-odin-memory-card.netlify.app)
+[https://gli-odin-memory-card.netlify.app/](https://gli-odin-memory-card.netlify.app/)
+
 
 # React + Vite
 
